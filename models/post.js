@@ -6,6 +6,7 @@ const postSchema = new Schema({
 	message: { type: String, required: true },
 	created_by: { type: Schema.Types.ObjectId, ref: 'User' },
 	creation_date: { type: Date, default: Date.now() },
+	is_admin: { type: Boolean, default: false },
 })
 
 module.exports = mongoose.model('Post', postSchema)

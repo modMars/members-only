@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sign up</title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+	</head>
+	<body>
+		<% if (errors.length > 0) { %>
+		<h1>THERES AN ERROR!!!</h1>
+		<% for( let index = 0; index < errors.length; index++ ) { %>
+		<p><%= errors[index].msg %></p>
+		<% } %> <% } %>
+		<h2>Sign up</h2>
+		<form method="post">
+			<label for="first_name">First name</label>
+			<input type="text" name="first_name" />
+			<label for="last_name">Last name</label>
+			<input type="text" name="last_name" />
+			<label for="email">E-mail</label>
+			<input type="email" name="email" />
+			<label for="password">Password</label>
+			<input type="password" name="password" />
+			<label for="password-confirm">Please confirm your password</label>
+			<input type="password" name="password-confirm" />
+			<button type="submit">Create account</button>
+		</form>
+	</body>
+</html>
