@@ -7,7 +7,8 @@ a {
 	color: #00b7ff;
 }
 
-input {
+input,
+textarea {
 	display: block;
 	margin-bottom: 1rem;
 	margin-top: 0.2rem;

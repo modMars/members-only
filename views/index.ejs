@@ -17,9 +17,11 @@
 			</nav>
 		</header>
 		<h1>Members only</h1>
-		<% console.log(user)%> <% if (user) { %>
+		<% if (user) { %>
 		<h2>Welcome back! <%= user.full_name %></h2>
+		<a href="new">Create new message</a>
 		<% } %>
+		<br />
 		<a href="/sign-up">Sign up</a>
 	</body>
 </html>

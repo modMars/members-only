@@ -1,4 +1,3 @@
-const { promisify } = require('util')
 const User = require('../models/user')
 const { body, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')

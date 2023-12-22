@@ -8,7 +8,6 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcryptjs')
 const User = require('./models/user')
-const flash = require('connect-flash')
 
 require('dotenv').config()
 
@@ -16,6 +15,7 @@ const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const signUpRouter = require('./routes/sign-up')
 const logInRouter = require('./routes/log-in')
+const newMsgRouter = require('./routes/new')
 
 const app = express()
 
@@ -86,6 +86,7 @@ app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/sign-up', signUpRouter)
 app.use('/log-in', logInRouter)
+app.use('/new', newMsgRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

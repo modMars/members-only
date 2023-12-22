@@ -5,12 +5,12 @@
 		<link rel="stylesheet" href="/stylesheets/style.css" />
 	</head>
 	<body>
+		<h2>New message</h2>
 		<% if (errors.length > 0) { %>
-		<h1>THERES AN ERROR!!!</h1>
+		<h2><strong>THERES AN ERROR!!!</strong></h2>
 		<% for( let index = 0; index < errors.length; index++ ) { %>
 		<p><%= errors[index].msg %></p>
 		<% } %> <% } %>
-		<h2>Sign up</h2>
 		<form method="POST">
 			<label for="title">Title</label>
 			<input type="text" name="title" />
