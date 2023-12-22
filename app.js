@@ -8,11 +8,14 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcryptjs')
 const User = require('./models/user')
+const flash = require('connect-flash')
+
 require('dotenv').config()
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const signUpRouter = require('./routes/sign-up')
+const logInRouter = require('./routes/log-in')
 
 const app = express()
 
@@ -31,20 +34,23 @@ app.set('view engine', 'ejs')
 
 app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: true }))
 passport.use(
-	new LocalStrategy(async (email, password, done) => {
+	new LocalStrategy({ usernameField: 'email', passwordField: 'password' }, async (username, password, done) => {
 		try {
-			const user = await User.findOne({ email: email })
+			console.log('Authenticating user with email:', username)
+			const user = await User.findOne({ email: username })
 			if (!user) {
+				console.log('User not found:', username)
 				return done(null, false, { message: 'Incorrect email' })
 			}
-			//compares the password entered by the user with the hash stored in the database using the bcrypt.compare() method. This method returns a boolean value indicating whether or not the hashes match.
 			const match = await bcrypt.compare(password, user.password)
 			if (!match) {
-				// passwords do not match!
+				console.log('Incorrect password for user:', username)
 				return done(null, false, { message: 'Incorrect password' })
 			}
+			console.log('User authenticated successfully:', username)
 			return done(null, user)
 		} catch (err) {
+			console.error('Authentication error:', err)
 			return done(err)
 		}
 	})
@@ -62,9 +68,9 @@ passport.deserializeUser(async (id, done) => {
 		done(err)
 	}
 })
+app.use(express.urlencoded({ extended: false }))
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(express.urlencoded({ extended: false }))
 
 app.use((req, res, next) => {
 	res.locals.currentUser = req.user
@@ -76,10 +82,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
-
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/sign-up', signUpRouter)
+app.use('/log-in', logInRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

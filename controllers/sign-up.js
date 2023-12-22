@@ -1,3 +1,4 @@
+const { promisify } = require('util')
 const User = require('../models/user')
 const { body, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
@@ -37,7 +38,7 @@ exports.sign_up_post = [
 		} else {
 			// Data from form is valid. Save user.
 			try {
-				bcrypt.hash(req.body.password, 12, async (err, hashedPassword) => {
+				bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
 					if (err) {
 						return next(err)
 					} else {
@@ -48,6 +49,9 @@ exports.sign_up_post = [
 							password: hashedPassword,
 						})
 						const result = await user.save()
+						console.log('Created user..')
+						console.log('Username: ', user.email)
+						console.log('Hash: ', user.password)
 						res.redirect('/')
 					}
 				})

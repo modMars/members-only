@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>New message</title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+	</head>
+	<body>
+		<% if (errors.length > 0) { %>
+		<h1>THERES AN ERROR!!!</h1>
+		<% for( let index = 0; index < errors.length; index++ ) { %>
+		<p><%= errors[index].msg %></p>
+		<% } %> <% } %>
+		<h2>Sign up</h2>
+		<form method="POST">
+			<label for="title">Title</label>
+			<input type="text" name="title" />
+			<label for="message">Message</label>
+			<textarea name="message" id="message" cols="30" rows="10"></textarea>
+			<button type="submit">Create message</button>
+		</form>
+	</body>
+</html>

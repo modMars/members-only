@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Log in</title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+	</head>
+	<body>
+		<% if (errors.length > 0) { %>
+		<h1>THERES AN ERROR!!!</h1>
+		<% for( let index = 0; index < errors.length; index++ ) { %>
+		<p><%= errors[index].msg %></p>
+		<% } %> <% } %>
+		<h2>Log in</h2>
+		<form action="/log-in" method="POST">
+			<label for="email">E-Mail</label>
+			<input name="email" placeholder="email" type="text" />
+			<label for="password">Password</label>
+			<input name="password" type="password" />
+			<button>Log In</button>
+		</form>
+	</body>
+</html>

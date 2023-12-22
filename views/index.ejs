@@ -5,8 +5,21 @@
 		<link rel="stylesheet" href="/stylesheets/style.css" />
 	</head>
 	<body>
+		<header>
+			<nav>
+				<ul>
+					<% if (user) { %>
+					<li><a href="log-out">Log out</a></li>
+					<% } else { %>
+					<li><a href="log-in">Log in</a></li>
+					<% } %>
+				</ul>
+			</nav>
+		</header>
 		<h1>Members only</h1>
-		<p>Welcome to Members only!</p>
+		<% console.log(user)%> <% if (user) { %>
+		<h2>Welcome back! <%= user.full_name %></h2>
+		<% } %>
 		<a href="/sign-up">Sign up</a>
 	</body>
 </html>
