@@ -4,7 +4,7 @@ exports.log_in_get = (req, res, next) => {
 	if (req.user) {
 		res.redirect('/')
 	}
-	res.render('log_in', { errors: [] })
+	res.render('log_in', {})
 }
 
 exports.log_in_post = [

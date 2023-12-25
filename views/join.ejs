@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Members only</title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+	</head>
+	<body>
+		<header>
+			<nav>
+				<ul>
+					<% if (currentUser) { %>
+					<li><a href="log-out">Log out</a></li>
+					<li><a href="join">Join</a></li>
+					<% } else { %>
+					<li><a href="log-in">Log in</a></li>
+					<% } %>
+				</ul>
+			</nav>
+		</header>
+		<% if (typeof wrong_word !== 'undefined') { %>
+		<h3><%= wrong_word %></h3>
+		<% } %>
+		<form method="POST">
+			<label for="secret">Secret word?</label>
+			<input type="text" name="secret" />
+			<button type="submit">Submit</button>
+		</form>
+	</body>
+</html>

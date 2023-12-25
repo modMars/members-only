@@ -7,7 +7,7 @@ exports.new_get = (req, res, next) => {
 	if (!req.user) {
 		res.redirect('/log-in')
 	}
-	res.render('new', { errors: [] })
+	res.render('new', {})
 }
 
 exports.new_post = [
@@ -30,6 +30,26 @@ exports.new_post = [
 				created_by: req.user.id,
 			})
 			const result = await post.save()
+			res.redirect('/')
+		}
+	},
+]
+
+exports.delete_get = (req, res, next) => {
+	if (!req.user) {
+		res.redirect('/log-in')
+	}
+	res.render('delete', {})
+}
+
+exports.delete_post = [
+	async (req, res, next) => {
+		const id = req.params.id
+		try {
+			await Post.findByIdAndDelete(id)
+		} catch (err) {
+			console.log(err)
+		} finally {
 			res.redirect('/')
 		}
 	},

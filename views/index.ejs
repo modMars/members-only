@@ -8,20 +8,36 @@
 		<header>
 			<nav>
 				<ul>
-					<% if (user) { %>
+					<% if (typeof currentUser != 'undefined' && !currentUser.membership_status) { %>
+					<li><a href="join">Join</a></li>
+					<% } %> <% if (typeof currentUser != 'undefined') { %>
 					<li><a href="log-out">Log out</a></li>
 					<% } else { %>
 					<li><a href="log-in">Log in</a></li>
+					<li><a href="/sign-up">Sign up</a></li>
 					<% } %>
 				</ul>
 			</nav>
 		</header>
 		<h1>Members only</h1>
-		<% if (user) { %>
-		<h2>Welcome back! <%= user.full_name %></h2>
+		<% if (currentUser) { %>
+		<h2>Welcome back! <%= currentUser.full_name %></h2>
 		<a href="new">Create new message</a>
+		<% } %> <% for( let i = 0; i < posts.length; i++ ) { %>
+		<div class="postCard">
+			<h3><%= posts[i].title %></h3>
+			<p><%= posts[i].message %></p>
+			<% if (typeof currentUser != 'undefined' && currentUser.membership_status) { %>
+			<div class="postCard-user">
+				<p><%= posts[i].created_by.full_name %></p>
+				<p><%= posts[i].formatted_creation_date %></p>
+			</div>
+			<% if (currentUser.admin_status) { %>
+			<div class="postCard-admin">
+				<a href="/delete/<%= posts[i].id %>">Delete post</a>
+			</div>
+			<% } %> <% } %>
+		</div>
 		<% } %>
-		<br />
-		<a href="/sign-up">Sign up</a>
 	</body>
 </html>

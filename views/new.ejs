@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<h2>New message</h2>
-		<% if (errors.length > 0) { %>
+		<% if (typeof errors !== 'undefined' && errors.length > 0) { %>
 		<h2><strong>THERES AN ERROR!!!</strong></h2>
 		<% for( let index = 0; index < errors.length; index++ ) { %>
 		<p><%= errors[index].msg %></p>

@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 
 //TODO Validate sign up data, hash passwords and save to db
 exports.sign_up_get = (req, res, next) => {
-	res.render('sign_up', { errors: [] })
+	res.render('sign_up', {})
 }
 
 exports.sign_up_post = [
